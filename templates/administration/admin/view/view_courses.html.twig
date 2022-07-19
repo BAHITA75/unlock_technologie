@@ -1,0 +1,53 @@
+{% block courses %}
+
+	<div class="table-responsive">
+		<table class="table table-bordered text-nowrap border-bottom" id="data-table-courses">
+			<thead>
+				<tr>
+					<th class="wd-15p border-bottom-0">Id</th>
+					<th class="wd-15p border-bottom-0">Intitulé</th>
+					<th class="wd-15p border-bottom-0">Lien</th>
+					<th class="wd-20p border-bottom-0">Description</th>
+					<th class="wd-10p border-bottom-0">Language</th>
+					{% if app.user and app.user.role == 'Administrateur'%}
+					<th class="wd-10p border-bottom-0">Actions</th>
+					{% endif %}
+
+				</tr>
+			</thead>
+			<tbody>
+				{% for course in results.courses %}
+					<tr>
+
+						<td>{{ course.id }}</td>
+						<td>{{ course.name }}</td>
+						<td>{{ course.link }}</td>
+						<td>{{ course.description }}</td>
+						<td>{{ course.category.name}}</td>
+
+						{% if app.user and app.user.role == 'Administrateur'%}
+						<td name="bstable-actions">
+							<div
+								class="btn-list">
+								{# Bouton upload #}
+								<a href="{{ asset('uploads/cours/' ~ course.link )}}" download="{{ course.name }}" class="btn btn-sm btn-light">
+									<i class="fe fe-download text-success"></i>
+								</a>
+								{# fin bouton upload #}
+
+								{# Bouton supprimer #}
+								<a href="{{ path('delete-cours', {'id': course.id })}}" id="bDel" type="button" class="btn btn-sm btn-danger" target="_blank">
+									<span class="fe fe-trash-2"></span>
+								</a>
+								{# fin bouton supprimer #}
+							</div>
+						</td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

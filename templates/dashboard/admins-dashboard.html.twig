@@ -1,0 +1,235 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Dashboard admin
+{% endblock %}
+{% block body %}
+
+	{% block javascripts_option %}
+	{% include "components/chartJS.html.twig" %}
+	{% endblock %}
+	{% if results.students is defined %}
+	{% set varStud = results.students %}
+	{% else %}
+		{% set varStud = "Aucun étudiant" %}
+	{% endif %}
+
+	{# <!--app-content open--> #}
+	<div class="main-content app-content mt-0">
+		<div class="side-app">
+			{# <!-- CONTAINER --> #}
+			<div class="main-container container-fluid">
+				{# Header #}
+				<div class="page-header">
+					<h1 class="page-title">Administration</h1>
+				</div>
+				{# Fin header #}
+
+				<div class="panel panel-primary">
+					<div class="tab-menu-heading">
+						<div class="tabs-menu">
+							{# Tabs #}
+							<ul class="nav panel-tabs panel-info">
+								<li>
+									<a href="#users" class="active modal-effect btn shadow-sm d-grid mb-3" data-bs-toggle="tab">
+										<span>
+											<i class="fe fe-user me-1"></i>Administrateur</span>
+									</a>
+								</li>
+								<li>
+									<a href="#teachers" data-bs-toggle="tab" class="modal-effect btn shadow-sm d-grid mb-3">
+										<span>
+											<i class="fe fe-calendar me-1"></i>Professeur</span>
+									</a>
+								</li>
+
+
+							</ul>
+						</div>
+					</div>
+
+					<div class="panel-body tabs-menu-body">
+						<div class="tab-content">
+
+
+							<div class="tab-pane active" id="users">
+
+								{# Tableaux et modal #}
+
+								<!-- ROW OPEN -->
+								<div class="row">
+									<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+										<a class="card bg-primary img-card box-primary-shadow">
+											{% embed "components/modal.html.twig" %}
+															{% set modalType = "modal-xl effect-flip-verticalshow" %}
+															{% set id = "xl-allStudent" %}
+															{% set buttonTitle = "Ajouter un utilisateur" %}
+															{% block button %}
+															<button class="card-body text-start" data-bs-effect="effect-flip-vertical" data-bs-toggle="modal" data-bs-target="#{{id}}">
+																<div class="d-flex justify-content-between">
+																	<div class="text-white me-4">
+																		<h2 class="mb-0 number-font">{% if results.students is defined %}
+																		{{ results.students | length }}
+																		{% else %}
+																			0
+																		{% endif %}</h2>
+																		<p class="text-white mb-0">Etudiants </p>
+																	</div>
+																	
+																	<div class="ms-auto"> <i class="fa fa-user-o text-white fs-30 me-2 mt-2"></i> </div>
+																</div>
+															</button>
+															{% endblock %}
+															{% block modalTitle %}Tous les étudiants
+															{% endblock %}
+															{% block dashboard %}
+																{% include "/administration/admin/view/view_students.html.twig" %}
+															{% endblock %}
+											{% endembed %}
+											
+										</a>
+									</div>
+									<!-- COL END -->
+									<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+										<a class="card bg-azure img-card box-azure-shadow">
+											{% embed "components/modal.html.twig" %}
+															{% set modalType = "modal-xl" %}
+															{% set id = "full-teacher" %}
+															{% block button %}
+															<button class="card-body text-start" data-bs-effect="effect-flip-vertical" data-bs-toggle="modal" data-bs-target="#{{id}}">
+																<div class="d-flex">
+																	<div class="text-white">
+																		<h2 class="mb-0 number-font">
+																		{% if results.teachers is defined %}{{ results.teachers | length }}
+																		{% else %}
+																			0
+																		{% endif %}
+																		</h2>
+																		<p class="text-white mb-0">Professeurs</p>
+																	</div>
+																	<div class="ms-auto"> <i class="fa fa-user-circle text-white fs-30 me-2 mt-2"></i> </div>
+																</div>
+															</button>
+															{% endblock %}
+															{% block modalTitle %}Tous les professeurs
+															{% endblock %}
+															{% block dashboard %}
+																{% include "/administration/admin/view/view_teachers.html.twig" %}
+															{% endblock %}
+														{% endembed %}
+											
+										</a>
+									</div>
+									<!-- COL END -->
+									<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+										<a class="card bg-success img-card box-success-shadow">
+											{% embed "components/modal.html.twig" %}
+															{% set modalType = "modal-xl" %}
+															{% set id = "xl-admins" %}
+															{% block button %}
+															<button class="card-body" data-bs-effect="effect-flip-vertical" data-bs-toggle="modal" data-bs-target="#{{id}}">
+																<div class="d-flex">
+																	<div class="text-white">
+																		<h2 class="mb-0 number-font text-start">
+																		{% if results.admins is defined %}{{ results.admins | length }}
+																		{% else %}
+																			0
+																		{% endif %}</h2>
+																		<p class="text-white mb-0">Administrateurs</p>
+																	</div>
+																	<div class="ms-auto"> <i class="fa fa-id-badge text-white fs-30 me-2 mt-2"></i> </div>
+																</div>
+															</button>
+															{% endblock %}
+															{% block modalTitle %}Tous les administrateurs
+															{% endblock %}
+															{% block dashboard %}
+																{% include "/administration/admin/view/view_admins.html.twig" %}
+															{% endblock %}
+														{% endembed %}
+											
+										</a>
+									</div>
+									{# <!-- COL END --> #}
+									<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+										<a class="card bg-info img-card box-info-shadow">
+											{% embed "components/modal.html.twig" %}
+												{% set modalType = "modal-xl" %}
+												{% set id = "full-session" %}
+												{% block button %}
+												<button class="card-body text-start" data-bs-effect="effect-flip-vertical" data-bs-toggle="modal" data-bs-target="#{{id}}">
+													<div class="d-flex">
+														<div class="text-white">
+															<h2 class="mb-0 number-font">{% if results.sessions is defined %}{{ results.sessions | length }}
+															{% else %}
+															0
+																{% endif %}</h2>
+															<p class="text-white mb-0">Sessions</p>
+														</div>
+														<div class="ms-auto"> <i class="fa fa-tags text-white fs-30 me-2 mt-2"></i> </div>
+													</div>
+												</button>
+												{% endblock %}
+												{% block modalTitle %}Toutes les sessions
+												{% endblock %}
+												{% block dashboard %}
+													{% include "/administration/admin/view/view_sessions.html.twig" %}
+												{% endblock %}
+											{% endembed %}
+											
+										</a>
+									</div>
+									{# <!-- COL END --> #}
+								</div>
+								{# <!-- ROW CLOSED --> #}
+
+
+								{# Fin tableaux et modal #}
+
+								<div class="row">
+									<div class="col-lg-8 col-md-12">
+										<div class="card">
+											<div class="card-header">
+												<h3 class="card-title">Nombres de jours de formations calculées par mois sur l'année.
+												</h3>
+											</div>
+											<div class="card-body">
+												<canvas id="chart-monthly" class="chartsh"></canvas>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-lg-4 col-md-12">
+										<div class="card" id="chart-sexe">
+											<div class="card-header">
+												<h3 class="card-title">Etudiants par genre.</h3>
+											</div>
+											<div class="card-body">
+												<div id="chart-sexe-donut" class="chartsh"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+
+							<div class="tab-pane" id="teachers">
+							{% set varStud = myStudents %}
+								{{ block("teacher", "dashboard/teachers-dashboard.html.twig") }}
+
+
+							</div>
+						</div>
+
+
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+		<script>
+	
+	</script>
+
+	{% endblock %}

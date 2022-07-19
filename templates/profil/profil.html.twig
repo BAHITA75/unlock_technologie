@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de
+{{app.user.firstname}}
+{% endblock %}
+
+{% block body %}
+
+
+<div class="main-content app-content mt-0">
+	<div class="side-app">
+
+		<!-- CONTAINER -->
+		<div class="main-container container-fluid">
+
+			<!-- PAGE-HEADER -->
+			<div class="page-header">
+				<h1 class="page-title">Modifier votre profil</h1>
+				<div>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="{{path('default')}}">Accueil</a>
+						</li>
+						<li class="breadcrumb-item active" aria-current="page">Modifier vos informations</li>
+					</ol>
+				</div>
+			</div>
+			<!-- PAGE-HEADER END -->
+
+			<!-- ROW-1 OPEN -->
+			<div class="row">
+				<div class="col-xl-4">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Modifier votre mot de passe</div>
+						</div>
+						<div class="card-body">
+							<div class="text-center chat-image mb-5">
+
+.
+								{% if app.user.picture %}
+								<a class="" href="#"><img alt="avatar"
+										src="{{ asset('uploads/user/' ~ app.user.picture)}}"
+										class="avatar avatar-xxl chat-profile mb-3 brround"></a>
+								{% elseif app.user.sexe == 0 %}
+								<a class="" href="#"><img alt="avatar"
+										src="{{ asset('uploads/avatar/avatarMen.png')}}"
+										class="avatar avatar-xxl chat-profile mb-3 brround"></a>
+								{% elseif app.user.sexe == 1 %}
+								<a class="" href="#"><img alt="avatar"
+										src="{{ asset('uploads/avatar/avatarWoman.png')}}"
+										class="avatar avatar-xxl chat-profile mb-3 brround"></a>
+								{% endif %}
+
+
+								<div class="main-chat-msg-name">
+									<a href="#">
+										<h5 class="mb-1 text-dark fw-semibold">{{app.user.fullname}}</h5>
+									</a>
+									<p class="text-muted mt-0 mb-0 pt-0 fs-13">{{app.user.role}}</p>
+								</div>
+							</div>
+							{{form_start(editUserPasswordForm)}}
+							<div class="form-group">
+
+								<div class="wrap-input100 validate-input input-group" id="Password-toggle">
+									<a href="#" class="input-group-text bg-white text-muted">
+										<i class="zmdi zmdi-key" aria-hidden="true"></i>
+									</a>
+									{{form_widget(editUserPasswordForm.password.first)}}
+								</div>
+								<div class="wrap-input100 validate-input input-group" id="Password-toggle">
+									<a href="#" class="input-group-text bg-white text-muted">
+										<i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+									</a>
+									{{form_widget(editUserPasswordForm.password.second)}}
+								</div>
+
+
+							</div>
+
+						</div>
+						<div class="card-footer text-end">
+							{{form_widget(editUserPasswordForm.submit)}}
+						</div>
+					</div>
+					{{form_end(editUserPasswordForm)}}
+					
+				</div>
+				<div class="col-xl-8">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">Edit Profile</h3>
+						</div>
+						<div class="card-body">
+							{{form_start(editUserForm)}}
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email</label>
+								{{form_widget(editUserForm.email)}}
+							</div>
+							<div class="form-group">
+								<label for="exampleInputnumber">Numéro de téléphone</label>
+								{{form_widget(editUserForm.phone)}}
+							</div>
+
+
+						</div>
+						<div class="card-footer text-end">
+							{{form_widget(editUserForm.submit)}}
+						</div>
+						{{form_end(editUserForm)}}
+					</div>
+				
+				</div>
+			</div>
+			<!-- ROW-1 CLOSED -->
+		</div>
+		<!--CONTAINER CLOSED -->
+
+	</div>
+</div>
+
+
+{% endblock %}
