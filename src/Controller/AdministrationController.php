@@ -98,7 +98,7 @@ class AdministrationController extends AbstractController
             $this->cache->delete('view_all_data');
             $this->cache->delete('dashboard');
 
-            $this->mailjet->sendEmail($user, 'Bienvenue Chez SCHOOLENT! vous venez d\'etre inscrit, votre session est ' . $session . ' qui debutera le ' . date_format($sessionStart, 'd-m-y') . ' Au ' . date_format($sessionEnd, 'd-m-y') . '. ' . 'Voici votre mot de passe temporaire :'   . $temporaryPassword . ' et veillez à le modifier dans votre espace profil.');
+            $this->mailjet->sendEmail($user, 'Bienvenue Chez Unlock Technologie! vous venez d\'etre inscrit (e), votre session est ' . $session . ', elle debutera le ' . date_format($sessionStart, 'd-m-y') . ' Au ' . date_format($sessionEnd, 'd-m-y') . '. ' . 'Voici votre mot de passe temporaire : ' . $temporaryPassword . ' et veillez à le modifier dans votre espace profil.', 'Notification d\'inscription');
 
             $this->notification->sendNotification('Bienvenue Chez SCHOOLENT! vous venez d\'etre inscrit, votre session est ' . $session . ' qui debutera le ' . date_format($sessionStart, 'd-m-y') . ' au ' . date_format($sessionEnd, 'd-m-y'), $user);
             $this->addFlash('success', 'Votre ajout a bien été pris en compte, un mail a été envoyé!');

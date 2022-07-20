@@ -29,7 +29,7 @@ class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            $mailjet->sendEmailContact($contact, 'Votre message a bien été envoyé, Un administrateur va vous répondre très bientôt!');
+            $mailjet->sendEmailContact($contact, 'Votre message a bien été envoyé, un administrateur vous répondra très bientôt!','Votre commande est en cours de traitement');
 
             $this->addFlash('contact_success', 'Votre message a bien été envoyé, Un administrateur va vous répondre très bientôt!');
             //Message de succès

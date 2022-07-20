@@ -83,7 +83,7 @@ class SecurityController extends AbstractController
                 $em->persist($user[0]);
                 $em->flush();
 
-                $this->mailjet->sendEmail($user[0], "Voici votre nouveau de mot passe temporaire : "   . $temporaryPassword . " Pensez à le modifier lors de la prochaine connexion sur votre espace personnel.");
+                $this->mailjet->sendEmail($user[0], "Voici votre nouveau de mot passe temporaire : "   . $temporaryPassword . " Pensez à le modifier lors de la prochaine connexion sur votre espace personnel.", 'Réinitialisez votre mot de passe');
                 $this->addFlash('success', 'Un email vient d\' être envoyé à cette adresse !');
             } else {
                 $this->addFlash('erreur', 'Ce compte n\'existe pas !');

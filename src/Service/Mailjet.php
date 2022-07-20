@@ -22,14 +22,15 @@ class Mailjet
         $this->mailJetKeySecret = $mailJet_api_key_secret;
     }
 
-    public function sendEmail(User $user, string $myMessage)
+    public function sendEmail(User $user, string $myMessage, string $subject)
     {
         $message = $this->twig->render('models/message.html.twig', [
             'user' => $user,
-            'message' => $myMessage
+            'message' => $myMessage,
+            'subjet' => $subject
         ]);
 
-        $this->send($this->generateSingleBody($user, "Unlock Technologie", $message));
+        $this->send($this->generateSingleBody($user, $subject, $message));
     }
 
     private function generateSingleBody(User $user, string $subject, string $message): array
@@ -60,14 +61,15 @@ class Mailjet
         ];
     }
 
-    public function sendEmailContact(Contact $contact, string $myMessage)
+    public function sendEmailContact(Contact $contact, string $myMessage, string $subject)
     {
         $message = $this->twig->render('models/contact.html.twig', [
             'contact' => $contact,
-            'message' => $myMessage
+            'message' => $myMessage,
+            'subject' => $subject
         ]);
 
-        $this->send($this->generateSingleBodyContact($contact, "Unlock Technologie", $message));
+        $this->send($this->generateSingleBodyContact($contact, $subject, $message));
     }
 
     private function generateSingleBodyContact(Contact $contact, string $subject, string $message): array
