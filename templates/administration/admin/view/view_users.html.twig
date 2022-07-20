@@ -21,13 +21,13 @@
 					<tr>
 						{% if user.picture %}
 							<td>
-								<a href="{{path('profil_user', {'id': user.id} ) }}"><img style="height:100px;width:100px;" src="{{ asset('uploads/user/' ~ user.picture)}}" alt=""></a></td>
+								<a href="{{path('profil_user', {'id': user.id} ) }}"><img style="height:100px;width:100px;" src="{{ secure_asset('uploads/user/' ~ user.picture)}}" alt=""></a></td>
 							{% elseif user.sexe == 0 %}
 								<td>
-									<a href="{{path('profil_user',{'id': user.id} )}}"><img style="height:100px;width:100px;" src="{{ asset('uploads/avatar/avatarMen.png')}}" alt=""></a></td>
+									<a href="{{path('profil_user',{'id': user.id} )}}"><img style="height:100px;width:100px;" src="{{ secure_asset('uploads/avatar/avatarMen.png')}}" alt=""></a></td>
 								{% elseif user.sexe == 1 %}
 									<td>
-										<a href="{{path('profil_user',{'id': user.id})}}"><img style="height:100px;width:100px;" src="{{ asset('uploads/avatar/avatarWoman.png')}}" alt=""></a></td>
+										<a href="{{path('profil_user',{'id': user.id})}}"><img style="height:100px;width:100px;" src="{{ secure_asset('uploads/avatar/avatarWoman.png')}}" alt=""></a></td>
 									{% endif %}
 
 									<td>{{ user.firstname }}</td>
