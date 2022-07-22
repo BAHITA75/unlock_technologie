@@ -4,6 +4,7 @@
 		<table class="table table-bordered text-nowrap border-bottom" id="data-table-calendars">
 			<thead>
 				<tr>
+					<th class="wd-15p border-bottom-0">Intitulé</th>
 					<th class="wd-15p border-bottom-0">Technologie</th>
 					<th class="wd-15p border-bottom-0">Session</th>
 					<th class="wd-15p border-bottom-0">Professeur</th>
@@ -18,7 +19,7 @@
 			<tbody>
 				{% for calendar in results.calendars %}
 					<tr>
-
+						<td>{{ calendar.name }}</td>
 						<td>{{ calendar.category }}</td>
 						<td>{{ calendar.session }}</td>
 						<td>{{ calendar.teacher }}</td>

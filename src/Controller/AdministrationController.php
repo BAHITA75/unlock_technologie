@@ -458,11 +458,11 @@ class AdministrationController extends AbstractController
             $this->cache->delete('dashboard');
 
             $this->notification->sendNotification("Votre intervention a été modifiée : " . date_format($dateStart, 'd-m-y') . " Au " . date_format($dateEnd, 'd-m-y.'), $teacher);
-            $this->mailjet->sendEmail($teacher, "Votre planning vient d'être mis à jour. Nouvelle intervention sur " . $cours . ' ' . $programmingLanguages . " du : " . date_format($dateStart, 'd-m-y') . " Au " . date_format($dateEnd, 'd-m-y.') . " Nom de session " . $nameSession . ".");
+            $this->mailjet->sendEmail($teacher, "Votre planning vient d'être mis à jour. Nouvelle intervention sur " . $cours . ' ' . $programmingLanguages . " du : " . date_format($dateStart, 'd-m-y') . " Au " . date_format($dateEnd, 'd-m-y.') . " Nom de session " . $nameSession . ".", "Votre planning a été mis à jour");
 
             foreach ($students as $student) {
                 $this->notification->sendNotification("Votre convocation a été a été modifié pour le cours: " . $cours . $programmingLanguages . " du : " . date_format($dateStart, 'd-m-y') . " Au " . date_format($dateEnd, 'd-m-y.') . " Avec le professeur " . $teacher . '.', $student);
-                $this->mailjet->sendEmail($student, "votre convocation vient d'être mis à jour pour le cours " . $cours . $programmingLanguages . " du : " . date_format($dateStart, 'd-m-y') . " Au " . date_format($dateEnd, 'd-m-y.') . " Avec le professeur " . $teacher . '.');
+                $this->mailjet->sendEmail($student, "votre convocation vient d'être mis à jour pour le cours " . $cours . $programmingLanguages . " du : " . date_format($dateStart, 'd-m-y') . " Au " . date_format($dateEnd, 'd-m-y.') . " Avec le professeur " . $teacher . '.', "Votre planning a été mis à jour");
             }
 
             $this->addFlash('success', 'La date a été modifiée !');
