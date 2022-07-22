@@ -188,10 +188,10 @@ class AdministrationController extends AbstractController
             . $cours . ' ' . $programmingLanguages . " du " . date_format($dateStart, 'd-m-y') . " Au " 
             . date_format($dateEnd, 'd-m-y.') . ' avec la session ' . $nameSession, $teacher);
 
-            $this->mailjet->sendEmail($teacher, "Votre planning pour la semaine du " . date_format($dateStart, 'd-m-y') . " Au " . date_format($dateEnd, 'd-m-y.') . " Intervention sur " . $cours . " " . $programmingLanguages . ".  avec la session " . $nameSession . ".");
+            $this->mailjet->sendEmail($teacher, "Votre planning pour la semaine du " . date_format($dateStart, 'd-m-y') . " Au " . date_format($dateEnd, 'd-m-y.') . " Intervention sur " . $cours . " " . $programmingLanguages . ".  avec la session " . $nameSession . ".", "Nouveau planning ajouté!");
             if ($student) {
                 foreach ($students as $student) {
-                    $this->mailjet->sendEmail($student, "Voici votre convocation pour le cours " . $cours . " " . $programmingLanguages . " de la semaine du  : " . date_format($dateStart, 'd-m-y') . " Au " . date_format($dateEnd, 'd-m-y.') . " Avec le professeur " . $teacher . '.');
+                    $this->mailjet->sendEmail($student, "Voici votre convocation pour le cours " . $cours . " " . $programmingLanguages . " de la semaine du  : " . date_format($dateStart, 'd-m-y') . " Au " . date_format($dateEnd, 'd-m-y.') . " Avec le professeur " . $teacher . '.', "Nouveau planning ajouté");
                     
                     $this->notification->sendNotification("Voici votre convocation pour le cours: " 
                     . $cours . $programmingLanguages . " du : " . date_format($dateStart, 'd-m-y') 
