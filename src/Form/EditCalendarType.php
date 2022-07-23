@@ -44,6 +44,11 @@ class EditCalendarType extends AbstractType
             'label' => 'Professeur',
             'class' => User::class,
             'choice_label' => 'fullname',
+            'query_builder' => function (UserRepository $teacher) {
+                return $teacher->createQueryBuilder('u')
+                    ->where('u.roles LIKE :role')
+                    ->setParameter('role', "%ROLE_TEACHER%");
+            },
         ])
         ->add('submit', SubmitType::class, [
             'attr' => ['class' => 'col-md-6 btn btn-primary btn-block mx-auto'],
