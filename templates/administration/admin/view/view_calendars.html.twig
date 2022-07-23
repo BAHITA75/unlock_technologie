@@ -22,7 +22,13 @@
 						<td>{{ calendar.name }}</td>
 						<td>{{ calendar.category }}</td>
 						<td>{{ calendar.session }}</td>
-						<td>{{ calendar.teacher }}</td>
+							{% if calendar.teacher %}
+
+								<td>{{ calendar.teacher }}</td>
+							{% elseif calendar.teacher == null %}
+								<td><b class="text-danger">Professeur non programmé!</b></td>
+							{% endif %}
+
 						<td>{{ calendar.start|date("d/m/Y") }}</td>
 						<td>{{ calendar.end|date("d/m/Y") }}</td>
 
