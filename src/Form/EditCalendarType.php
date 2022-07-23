@@ -6,6 +6,7 @@ use App\Entity\Calendar;
 use App\Entity\ProgrammingLanguage;
 use App\Entity\Session;
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
