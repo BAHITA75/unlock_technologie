@@ -154,4 +154,20 @@ class DashboardController extends AbstractController
             'contacts' => $contacts,
         ]);
     }
+
+    /**
+     * @Route("admin/delete/contact/{id}", name="delete_contact")
+     */
+    public function deletecontact(Contact $contact, Request $request): Response
+    {
+        $this->entityManager->remove($contact);
+        $this->entityManager->flush();
+
+        // reinitialiser le cache à chaque modification
+        $this->cache->delete('view_all_data');
+        $this->cache->delete('dashboard');
+
+        return $this->redirect($request->get('redirect') ?? '/admin/contact');
+        $this->addFlash('success', 'Le contact a été supprimée');
+    }
 }
