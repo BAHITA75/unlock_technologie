@@ -36,20 +36,25 @@ Message d'assistance
                                                         <td>{{ contact.phone }}</td>
                                                         <td>{{ contact.email }}</td>
                                                         <td>{{ contact.objet }}</td>
-                                                        <td>	{% embed "components/modal.html.twig" %}
-									{% set modalType = "modal-sm" %}
-									{% set id = "message" %}
-									{% block button %}
-									{% if contact.message | length > 30 %}<button data-bs-toggle="modal" data-bs-target="#{{id}}">{{contact.message | length > 30 ? contact.message|slice(0, 30) ~ '...' : contact.message}}
-														</button>{% endif %}
-									{% endblock %}
-									{% block modalTitle %}Message
-									{% endblock %}
-									{% block dashboard %}
-									
-										<p class="text-wrap">{{contact.message}}</p>
-									{% endblock %}
-								{% endembed %}</td>
+                                                        <td>
+                                                        {% if contact.message | length > 45 %}	
+                                                            {% embed "components/modal.html.twig" %}
+                                                                {% set modalType = "modal-sm" %}
+                                                                {% set id = "message" %}
+                                                                {% block button %}
+                                                                    <button data-bs-toggle="modal" data-bs-target="#{{id}}">{{contact.message | length > 45 ? contact.message|slice(0, 45) ~ '...' : contact.message}}
+                                                                    </button>  
+                                                                {% endblock %}
+                                                                {% block modalTitle %}Message
+                                                                {% endblock %}
+                                                                {% block dashboard %}
+                                                                    <p class="text-wrap">{{contact.message}}</p>
+                                                                {% endblock %}
+                                                            {% endembed %}
+                                                        {% elseif contact.message | length < 45 %}
+                                                            {{ contact.message }}
+                                                        {% endif %}
+                                                        </td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>
